@@ -43,6 +43,24 @@ export function Post() {
           </p>
         </p>
       </div>
+
+      <form className="group mt-6 w-full border-t border-t-gray-600 pt-6">
+        <strong className="leading-[1.6] text-gray-100">
+          Deixe seu feedback
+        </strong>
+        <textarea
+          placeholder="Deixe um comentário"
+          className="mt-4 h-24 w-full resize-none rounded-lg bg-gray-900 p-4 leading-[1.4] text-gray-100"
+        />
+        <footer className="invisible max-h-0 group-focus-within:visible group-focus-within:max-h-none">
+          <button
+            type="submit"
+            className="mt-4 cursor-pointer rounded-lg bg-green-500 px-6 py-4 font-bold text-white transition hover:bg-green-300"
+          >
+            Publicar
+          </button>
+        </footer>
+      </form>
     </article>
   )
 }
