@@ -11,7 +11,6 @@ function App() {
         <Sidebar />
         <div>
           <Post />
-          <Post />
         </div>
       </div>
     </div>

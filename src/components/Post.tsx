@@ -1,3 +1,5 @@
+import { Comment } from './Comment'
+
 export function Post() {
   return (
     <article className="rounded-lg bg-gray-800 p-10 not-last:mb-8">
@@ -61,6 +63,12 @@ export function Post() {
           </button>
         </footer>
       </form>
+
+      <div className="mt-8">
+        <Comment />
+        <Comment />
+        <Comment />
+      </div>
     </article>
   )
 }
