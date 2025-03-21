@@ -1,13 +1,10 @@
 import { PiThumbsUp, PiTrash } from 'react-icons/pi'
+import { Avatar } from './Avatar'
 
 export function Comment() {
   return (
     <div className="mt-6 flex gap-4">
-      <img
-        src="https://github.com/mauriciotp.png"
-        alt=""
-        className="h-12 w-12 rounded-lg"
-      />
+      <Avatar src="https://github.com/mauriciotp.png" />
 
       <div className="grow">
         <div className="rounded-lg bg-gray-700 p-4">

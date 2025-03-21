@@ -1,4 +1,5 @@
 import { PiPencilLine } from 'react-icons/pi'
+import { Avatar } from './Avatar'
 
 export function Sidebar() {
   return (
@@ -10,11 +11,8 @@ export function Sidebar() {
       />
 
       <div className="-mt-6 flex flex-col items-center">
-        <img
-          className="box-content h-12 w-12 rounded-lg border-4 border-gray-800 outline-2 outline-green-500"
-          src="https://github.com/mauriciotp.png"
-          alt=""
-        />
+        <Avatar hasBorder={true} src="https://github.com/mauriciotp.png" />
+
         <strong className="mt-4 leading-[1.6] text-gray-100">
           Maurício Pinto
         </strong>

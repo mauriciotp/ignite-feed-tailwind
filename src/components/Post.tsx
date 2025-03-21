@@ -1,3 +1,4 @@
+import { Avatar } from './Avatar'
 import { Comment } from './Comment'
 
 export function Post() {
@@ -5,10 +6,7 @@ export function Post() {
     <article className="rounded-lg bg-gray-800 p-10 not-last:mb-8">
       <header className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <img
-            src="https://github.com/mauriciotp.png"
-            className="box-content h-12 w-12 rounded-lg border-4 border-gray-800 outline-2 outline-green-500"
-          />
+          <Avatar hasBorder={true} src="https://github.com/carnotbraun.png" />
           <div className="flex flex-col">
             <strong className="leading-[1.6] text-gray-100">
               Maurício Pinto
