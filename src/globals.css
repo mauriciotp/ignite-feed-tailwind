@@ -25,4 +25,10 @@
     outline: transparent;
     box-shadow: 0 0 0 2px var(--color-green-500);
   }
+
+  @media (max-width: 768px) {
+    html {
+      font-size: 87.5%;
+    }
+  }
 }
