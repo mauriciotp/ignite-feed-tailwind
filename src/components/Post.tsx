@@ -2,7 +2,7 @@ import { format, formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import { Avatar } from './Avatar'
 import { Comment } from './Comment'
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, InvalidEvent, useState } from 'react'
 
 interface Content {
   type: 'link' | 'paragraph'
@@ -44,16 +44,23 @@ export function Post({ author, content, publishedAt }: PostProps) {
   }
 
   function handleNewCommentChange(e: ChangeEvent<HTMLTextAreaElement>) {
+    e.target.setCustomValidity('')
     setNewCommentText(e.target.value)
   }
 
-  function deleteComment(commentToDelete) {
+  function handleNewCommentInvalid(e: InvalidEvent<HTMLTextAreaElement>) {
+    e.target.setCustomValidity('Este campo é obrigatório!')
+  }
+
+  function deleteComment(commentToDelete: string) {
     const newCommentList = comments.filter(
       (comment) => comment !== commentToDelete,
     )
 
     setComments(newCommentList)
   }
+
+  const isNewCommentEmpty = newCommentText.length === 0
 
   return (
     <article className="rounded-lg bg-gray-800 p-10 not-last:mb-8">
@@ -103,13 +110,16 @@ export function Post({ author, content, publishedAt }: PostProps) {
         <textarea
           value={newCommentText}
           onChange={handleNewCommentChange}
+          required
+          onInvalid={handleNewCommentInvalid}
           placeholder="Deixe um comentário"
           className="mt-4 h-24 w-full resize-none rounded-lg bg-gray-900 p-4 leading-[1.4] text-gray-100"
         />
         <footer className="invisible max-h-0 group-focus-within:visible group-focus-within:max-h-none">
           <button
             type="submit"
-            className="mt-4 cursor-pointer rounded-lg bg-green-500 px-6 py-4 font-bold text-white transition hover:bg-green-300"
+            disabled={isNewCommentEmpty}
+            className="mt-4 cursor-pointer rounded-lg bg-green-500 px-6 py-4 font-bold text-white transition not-disabled:hover:bg-green-300 disabled:cursor-not-allowed disabled:opacity-70"
           >
             Publicar
           </button>
