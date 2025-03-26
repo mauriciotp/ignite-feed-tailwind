@@ -3,9 +3,14 @@ import { Avatar } from './Avatar'
 
 interface CommentProps {
   content: string
+  onDeleteComment: (commentToDelete: string) => void
 }
 
-export function Comment({ content }: CommentProps) {
+export function Comment({ content, onDeleteComment }: CommentProps) {
+  function handleDeleteComment() {
+    onDeleteComment(content)
+  }
+
   return (
     <div className="mt-6 flex gap-4">
       <Avatar hasBorder={false} src="https://github.com/mauriciotp.png" />
@@ -25,6 +30,7 @@ export function Comment({ content }: CommentProps) {
             </div>
 
             <button
+              onClick={handleDeleteComment}
               title="Deletar comentário"
               className="cursor-pointer rounded-xs text-gray-400 hover:text-red-500"
             >

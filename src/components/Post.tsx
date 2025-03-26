@@ -47,6 +47,14 @@ export function Post({ author, content, publishedAt }: PostProps) {
     setNewCommentText(e.target.value)
   }
 
+  function deleteComment(commentToDelete) {
+    const newCommentList = comments.filter(
+      (comment) => comment !== commentToDelete,
+    )
+
+    setComments(newCommentList)
+  }
+
   return (
     <article className="rounded-lg bg-gray-800 p-10 not-last:mb-8">
       <header className="flex items-center justify-between">
@@ -110,7 +118,11 @@ export function Post({ author, content, publishedAt }: PostProps) {
 
       <div className="mt-8">
         {comments.map((comment) => (
-          <Comment key={comment} content={comment} />
+          <Comment
+            key={comment}
+            content={comment}
+            onDeleteComment={deleteComment}
+          />
         ))}
       </div>
     </article>
