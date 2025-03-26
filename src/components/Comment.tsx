@@ -1,7 +1,11 @@
 import { PiThumbsUp, PiTrash } from 'react-icons/pi'
 import { Avatar } from './Avatar'
 
-export function Comment() {
+interface CommentProps {
+  content: string
+}
+
+export function Comment({ content }: CommentProps) {
   return (
     <div className="mt-6 flex gap-4">
       <Avatar hasBorder={false} src="https://github.com/mauriciotp.png" />
@@ -28,7 +32,7 @@ export function Comment() {
             </button>
           </header>
 
-          <p className="mt-4 text-gray-300">Muito bom Devon, parabéns!! 👏👏</p>
+          <p className="mt-4 text-gray-300">{content}</p>
         </div>
 
         <footer className="mt-4">

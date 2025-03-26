@@ -12,16 +12,16 @@ const posts = [
     },
     content: [
       {
-        type: 'paragraph',
+        type: 'paragraph' as const,
         content: 'Fala galeraa 👋',
       },
       {
-        type: 'paragraph',
+        type: 'paragraph' as const,
         content:
           'Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀',
       },
       {
-        type: 'link',
+        type: 'link' as const,
         content: 'jane.design/doctorcare',
       },
     ],
@@ -36,16 +36,16 @@ const posts = [
     },
     content: [
       {
-        type: 'paragraph',
+        type: 'paragraph' as const,
         content: 'Fala galeraa 👋',
       },
       {
-        type: 'paragraph',
+        type: 'paragraph' as const,
         content:
           'Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀',
       },
       {
-        type: 'link',
+        type: 'link' as const,
         content: 'jane.design/doctorcare',
       },
     ],
@@ -64,6 +64,7 @@ function App() {
         <main>
           {posts.map((post) => (
             <Post
+              key={post.id}
               author={post.author}
               content={post.content}
               publishedAt={post.publishedAt}

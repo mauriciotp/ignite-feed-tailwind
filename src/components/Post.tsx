@@ -2,6 +2,7 @@ import { format, formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import { Avatar } from './Avatar'
 import { Comment } from './Comment'
+import { ChangeEvent, FormEvent, useState } from 'react'
 
 interface Content {
   type: 'link' | 'paragraph'
@@ -19,6 +20,9 @@ interface PostProps {
 }
 
 export function Post({ author, content, publishedAt }: PostProps) {
+  const [comments, setComments] = useState(['Muito bacana hein?!'])
+  const [newCommentText, setNewCommentText] = useState('')
+
   const publishedDateFormatted = format(
     publishedAt,
     "d 'de' LLLL 'às' HH:mm'h'",
@@ -31,6 +35,17 @@ export function Post({ author, content, publishedAt }: PostProps) {
     locale: ptBR,
     addSuffix: true,
   })
+
+  function handleCreateNewComment(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+
+    setComments([...comments, newCommentText])
+    setNewCommentText('')
+  }
+
+  function handleNewCommentChange(e: ChangeEvent<HTMLTextAreaElement>) {
+    setNewCommentText(e.target.value)
+  }
 
   return (
     <article className="rounded-lg bg-gray-800 p-10 not-last:mb-8">
@@ -59,10 +74,10 @@ export function Post({ author, content, publishedAt }: PostProps) {
       <div className="mt-6 leading-[1.6] text-gray-300 [&_a]:font-bold [&_a]:text-green-500 [&_a]:hover:text-green-300 [&_p]:mt-4">
         {content.map((line) => {
           if (line.type === 'paragraph') {
-            return <p>{line.content}</p>
+            return <p key={line.content}>{line.content}</p>
           } else if (line.type === 'link') {
             return (
-              <p>
+              <p key={line.content}>
                 <a href="">{line.content}</a>
               </p>
             )
@@ -70,11 +85,16 @@ export function Post({ author, content, publishedAt }: PostProps) {
         })}
       </div>
 
-      <form className="group mt-6 w-full border-t border-t-gray-600 pt-6">
+      <form
+        onSubmit={handleCreateNewComment}
+        className="group mt-6 w-full border-t border-t-gray-600 pt-6"
+      >
         <strong className="leading-[1.6] text-gray-100">
           Deixe seu feedback
         </strong>
         <textarea
+          value={newCommentText}
+          onChange={handleNewCommentChange}
           placeholder="Deixe um comentário"
           className="mt-4 h-24 w-full resize-none rounded-lg bg-gray-900 p-4 leading-[1.4] text-gray-100"
         />
@@ -89,9 +109,9 @@ export function Post({ author, content, publishedAt }: PostProps) {
       </form>
 
       <div className="mt-8">
-        <Comment />
-        <Comment />
-        <Comment />
+        {comments.map((comment) => (
+          <Comment key={comment} content={comment} />
+        ))}
       </div>
     </article>
   )
