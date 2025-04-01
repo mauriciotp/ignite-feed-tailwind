@@ -1,5 +1,6 @@
 import { PiThumbsUp, PiTrash } from 'react-icons/pi'
 import { Avatar } from './Avatar'
+import { useState } from 'react'
 
 interface CommentProps {
   content: string
@@ -7,8 +8,14 @@ interface CommentProps {
 }
 
 export function Comment({ content, onDeleteComment }: CommentProps) {
+  const [likeCount, setLikeCount] = useState(0)
+
   function handleDeleteComment() {
     onDeleteComment(content)
+  }
+
+  function handleLikeComment() {
+    setLikeCount(likeCount + 1)
   }
 
   return (
@@ -42,10 +49,15 @@ export function Comment({ content, onDeleteComment }: CommentProps) {
         </div>
 
         <footer className="mt-4">
-          <button className="flex cursor-pointer items-center rounded-xs text-gray-400 hover:text-green-300">
+          <button
+            onClick={handleLikeComment}
+            className="flex cursor-pointer items-center rounded-xs text-gray-400 hover:text-green-300"
+          >
             <PiThumbsUp className="mr-2" />
             Aplaudir{' '}
-            <span className="before:px-1 before:content-['\2022']">20</span>
+            <span className="before:px-1 before:content-['\2022']">
+              {likeCount}
+            </span>
           </button>
         </footer>
       </div>
